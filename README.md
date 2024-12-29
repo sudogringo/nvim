@@ -2,8 +2,11 @@
 
 ## Introduction
 
-My config of NeoVim
+My config of NeoVim.
+
 Coming from Vim, still learning the ropes.
+
+Added: Transparency, Everforest, ranger
 
 ## Installation
 
