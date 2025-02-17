@@ -231,13 +231,13 @@ require('lazy').setup({
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
   {
-    "kelly-lin/ranger.nvim",
+    'kelly-lin/ranger.nvim',
     config = function()
-      require("ranger-nvim").setup({ replace_netrw = true })
-      vim.api.nvim_set_keymap("n", "<leader>ef", "", {
+      require('ranger-nvim').setup { replace_netrw = true }
+      vim.api.nvim_set_keymap('n', '<leader>ef', '', {
         noremap = true,
         callback = function()
-          require("ranger-nvim").open(true)
+          require('ranger-nvim').open(true)
         end,
       })
     end,
@@ -977,7 +977,7 @@ require('lazy').setup({
   --    This is the easiest way to modularize your config.
   --
   --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
-  -- { import = 'custom.plugins' },
+  { import = 'custom.plugins' },
   --
   -- For additional information with loading, sourcing and examples see `:help lazy.nvim-🔌-plugin-spec`
   -- Or use telescope!
