@@ -235,6 +235,7 @@ require('lazy').setup({
     config = function()
       require('ranger-nvim').setup { replace_netrw = true }
       vim.api.nvim_set_keymap('n', '<leader>ef', '', {
+        desc = 'Move focus to the left window',
         noremap = true,
         callback = function()
           require('ranger-nvim').open(true)
@@ -657,6 +658,8 @@ require('lazy').setup({
         -- clangd = {},
         -- gopls = {},
         pyright = {},
+        -- djlsp = {},
+        ts_ls = {},
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
