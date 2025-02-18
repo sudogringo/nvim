@@ -120,6 +120,14 @@ end)
 
 -- Enable break indent
 vim.opt.breakindent = true
+-- expand tab input with spaces characters
+vim.o.expandtab = true
+-- syntax aware indentations for newline inserts
+vim.o.smartindent = true
+-- num of space characters per tab
+vim.o.tabstop = 4
+-- spaces per indentation level
+vim.o.shiftwidth = 4
 
 -- Save undo history
 vim.opt.undofile = true
@@ -297,7 +305,7 @@ require('lazy').setup({
     },
   },
 
-  -- NOTE: Plugins can also be configured to run Lua code when they are loaded.
+  -- NOTE: Plugins can also be configured to run Lua code when they are loaded.init
   --
   -- This is often very useful to both group configuration, as well as handle
   -- lazy loading plugins that don't need to be loaded immediately at startup.
@@ -788,6 +796,7 @@ require('lazy').setup({
         -- You can use 'stop_after_first' to run the first available formatter from the list
         javascript = { 'prettierd', 'prettier', stop_after_first = true },
         htmldjango = { 'djlint' },
+        css = { 'prettier' },
       },
     },
   },
@@ -1001,11 +1010,11 @@ require('lazy').setup({
   --  Here are some example plugins that I've included in the Kickstart repository.
   --  Uncomment any of the lines below to enable them (you will need to restart nvim).
   --
-  -- require 'kickstart.plugins.debug',
+  require 'kickstart.plugins.debug',
   -- require 'kickstart.plugins.indent_line',
   -- require 'kickstart.plugins.lint',
   require 'kickstart.plugins.autopairs',
-  -- require 'kickstart.plugins.neo-tree',
+  require 'kickstart.plugins.neo-tree',
   -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
