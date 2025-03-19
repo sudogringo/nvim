@@ -54,10 +54,11 @@ return {
           -- describe the hovered symbol using Markdown.
           if vim.opt_local.modifiable:get() then
             lint.try_lint()
-            lint.try_lint 'djlint'
           end
         end,
       })
     end,
   },
 }
+
+-- vim: ts=2 sts=2 sw=2 et
