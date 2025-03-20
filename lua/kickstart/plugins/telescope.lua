@@ -55,7 +55,13 @@ return {
         --   },
         -- },
         pickers = {
+          find_files = {
+            theme = 'dropdown',
+            results_height = 20,
+          },
           buffers = {
+            theme = 'dropdown',
+            results_height = 20,
             ignore_current_buffer = true,
             sort_lastused = true,
           },

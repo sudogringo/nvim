@@ -37,7 +37,7 @@ return {
     },
     keys = {
       {
-        '<leader>uC',
+        '<leader>nC',
         function()
           Snacks.picker.colorschemes()
         end,
@@ -66,14 +66,14 @@ return {
         desc = 'Lazygit',
       },
       {
-        '<leader>un',
+        '<leader>nn',
         function()
           Snacks.notifier.hide()
         end,
         desc = 'Dismiss All Notifications',
       },
       {
-        '<leader>tt>',
+        '<leader>t',
         function()
           Snacks.terminal()
         end,
