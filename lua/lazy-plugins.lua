@@ -10,8 +10,8 @@ require('lazy').setup({
   --
   -- Use `opts = {}` to force a plugin to be loaded.
   --
-  require 'kickstart/plugins/tokyonight',
-  require 'kickstart/plugins/everforest',
+  -- require 'kickstart/plugins/tokyonight',
+  -- require 'kickstart/plugins/everforest',
   require 'kickstart/plugins/ccc',
   require 'kickstart/plugins/gitsigns',
   require 'kickstart/plugins/which-key',
@@ -22,6 +22,9 @@ require('lazy').setup({
   require 'kickstart/plugins/cmp',
   require 'kickstart/plugins/todo-comments',
   require 'kickstart/plugins/mini',
+  -- require 'kickstart/plugins/themery',
+  require 'kickstart/plugins/snacks',
+  require 'kickstart/plugins/themes',
 
   -- Preloaded
   require 'kickstart.plugins.debug',

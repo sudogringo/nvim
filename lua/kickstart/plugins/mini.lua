@@ -32,10 +32,18 @@ return {
         return '%2l:%-2v'
       end
 
+      -- icons
+      require('mini.icons').setup()
+
+      -- notifications
+      -- require('mini.notify').setup()
+
+      -- tabline
+      require('mini.tabline').setup()
+
       -- ... and there is more!
       --  Check out: https://github.com/echasnovski/mini.nvim
     end,
   },
 }
 -- vim: ts=2 sts=2 sw=2 et
-

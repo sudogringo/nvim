@@ -36,7 +36,23 @@ return {
 
       -- Useful status updates for LSP.
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      { 'j-hui/fidget.nvim', opts = {} },
+      {
+        'j-hui/fidget.nvim',
+        opts = {
+          notification = {
+            -- Options related to how notifications are rendered as text
+            view = {
+              stack_upwards = false, -- Display notification items from bottom to top
+            },
+
+            -- Options related to the notification window and buffer
+            window = {
+              align = 'avoid_cursor', -- How to align the notification window
+              relative = 'editor', -- What the notification window position is relative to
+            },
+          },
+        },
+      },
 
       -- Allows extra capabilities provided by nvim-cmp
       'hrsh7th/cmp-nvim-lsp',
