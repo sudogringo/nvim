@@ -54,6 +54,13 @@ return {
         --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
         --   },
         -- },
+        defaults = vim.tbl_extend(
+          'force',
+          require('telescope.themes').get_dropdown(), -- or get_cursor, get_ivy
+          {
+            --- your own `default` options go here, e.g.:
+          }
+        ),
         pickers = {
           find_files = {
             theme = 'dropdown',
