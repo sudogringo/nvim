@@ -6,7 +6,23 @@ My config of NeoVim.
 
 Coming from Vim, still learning the ropes.
 
-Added: Transparency, Everforest, ranger
+Todo:
+[] Java language Server
+[] Java Project Creation commands
+[] Spell check keybinds
+
+
+Spell check:
+```
+set spelllang=en
+set spelllang=es
+set spell
+
+-- in Normal:
+z= -- Show recomendations
+]s -- Next
+[s -- Previous
+```
 
 ## Installation
 

@@ -60,6 +60,10 @@ return {
             results_height = 20,
           },
           buffers = {
+            mappings = {
+              n = { ['dd'] = 'delete_buffer' },
+              i = { ['<c-d>'] = 'delete_buffer' },
+            },
             theme = 'dropdown',
             results_height = 20,
             ignore_current_buffer = true,
