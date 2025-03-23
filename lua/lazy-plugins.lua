@@ -23,6 +23,8 @@ require('lazy').setup({
   require 'kickstart/plugins/snacks',
   require 'kickstart/plugins/noice',
   require 'kickstart/plugins/themes',
+  -- require 'kickstart/plugins/nvim-jdtls',
+  require 'kickstart/plugins/nvim-java',
 
   -- Preloaded
   require 'kickstart.plugins.debug',
