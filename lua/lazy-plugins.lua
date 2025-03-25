@@ -25,6 +25,7 @@ require('lazy').setup({
   require 'kickstart/plugins/themes',
   -- require 'kickstart/plugins/nvim-jdtls',
   require 'kickstart/plugins/nvim-java',
+  require 'kickstart/plugins/render-markdown',
 
   -- Preloaded
   require 'kickstart.plugins.debug',
