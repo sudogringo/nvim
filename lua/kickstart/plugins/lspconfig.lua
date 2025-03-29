@@ -315,10 +315,18 @@ return {
       require('mason-lspconfig').setup {
         automatic_installation = true,
         handlers = {
+          -- ['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+          --   border = 'single',
+          --   focusable = false,
+          --   relative = 'cursor',
+          --   width = math.max(math.min(vim.o.columns * 0.5, 80), 40),
+          --   height = math.max(math.min(vim.o.lines * 0.5, 20), 10),
+          -- }),
           function(server_name)
             -- if server_name == 'jdtls' then
             --   return
             -- end
+            --
             local server = servers[server_name] or {}
             -- This handles overriding only values explicitly passed
             -- by the server configuration above. Useful when disabling
@@ -329,13 +337,25 @@ return {
           jdtls = function()
             require('java').setup {
               -- Your custom jdtls settings goes here
+              handlers = {
+                ['$/progress'] = function(_, result, ctx)
+                  -- disable progress updates.
+                end,
+                --   ['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+                --     border = 'single',
+                --     focusable = false,
+                --     relative = 'cursor',
+                --     width = math.max(math.min(vim.o.columns * 0.5, 80), 40),
+                --     height = math.max(math.min(vim.o.lines * 0.5, 20), 10),
+                --   }),
+              },
             }
 
             require('lspconfig').jdtls.setup {
               -- Your custom nvim-java configuration goes here
               settings = {
                 java = {
-                  signatureHelp = { enabled = false },
+                  signatureHelp = { enabled = true },
                   configuration = {
                     runtimes = {
                       {

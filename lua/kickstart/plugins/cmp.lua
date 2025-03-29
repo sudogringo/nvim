@@ -42,15 +42,23 @@ return {
       luasnip.config.setup {}
 
       cmp.setup {
-        -- window is just added Testing
+        -- -- window is just added Testing
+        -- window = {
+        --   documentation = {
+        --     border = 'rounded',
+        --     max_width = 60,
+        --     max_height = 10,
+        --   },
+        -- },
         window = {
-          documentation = {
-            border = 'rounded',
-            max_width = 60,
-            max_height = 10,
+          completion = cmp.config.window.bordered(),
+          documentation = cmp.config.window.bordered(),
+        },
+        view = {
+          entries = {
+            follow_cursor = true,
           },
         },
-
         snippet = {
           expand = function(args)
             luasnip.lsp_expand(args.body)

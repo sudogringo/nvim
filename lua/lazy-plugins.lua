@@ -21,7 +21,7 @@ require('lazy').setup({
   require 'kickstart/plugins/todo-comments',
   require 'kickstart/plugins/mini',
   require 'kickstart/plugins/snacks',
-  require 'kickstart/plugins/noice',
+  -- require 'kickstart/plugins/noice',
   require 'kickstart/plugins/themes',
   require 'kickstart/plugins/lsp_signature',
   -- require 'kickstart/plugins/nvim-jdtls',
