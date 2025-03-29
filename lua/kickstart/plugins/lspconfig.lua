@@ -57,6 +57,10 @@ return {
       {
         'j-hui/fidget.nvim',
         opts = {
+          progress = {
+            suppress_on_insert = false, -- Suppress new messages while in insert mode
+          },
+
           notification = {
             -- Options related to how notifications are rendered as text
             view = {
@@ -206,6 +210,11 @@ return {
       --   vim.diagnostic.config { signs = { text = diagnostic_signs } }
       -- end
 
+      -- vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+      --   -- Use a sharp border with `FloatBorder` highlights
+      --   border = 'single',
+      --   anchor_bias = 'below',
+      -- })
       -- Diagnostic Config
       -- See :help vim.diagnostic.Opts
       vim.diagnostic.config {
@@ -324,9 +333,9 @@ return {
 
             require('lspconfig').jdtls.setup {
               -- Your custom nvim-java configuration goes here
-
               settings = {
                 java = {
+                  signatureHelp = { enabled = false },
                   configuration = {
                     runtimes = {
                       {

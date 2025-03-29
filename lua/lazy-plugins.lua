@@ -23,9 +23,13 @@ require('lazy').setup({
   require 'kickstart/plugins/snacks',
   require 'kickstart/plugins/noice',
   require 'kickstart/plugins/themes',
+  require 'kickstart/plugins/lsp_signature',
   -- require 'kickstart/plugins/nvim-jdtls',
   require 'kickstart/plugins/nvim-java',
   require 'kickstart/plugins/render-markdown',
+  require 'kickstart/plugins/markdown',
+  -- require 'kickstart/plugins/markdown-preview',
+  require 'kickstart/plugins/live-preview',
 
   -- Preloaded
   require 'kickstart.plugins.debug',

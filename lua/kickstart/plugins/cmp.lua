@@ -42,11 +42,21 @@ return {
       luasnip.config.setup {}
 
       cmp.setup {
+        -- window is just added Testing
+        window = {
+          documentation = {
+            border = 'rounded',
+            max_width = 60,
+            max_height = 10,
+          },
+        },
+
         snippet = {
           expand = function(args)
             luasnip.lsp_expand(args.body)
           end,
         },
+
         completion = { completeopt = 'menu,menuone,noinsert' },
 
         -- For an understanding of why these mappings were
