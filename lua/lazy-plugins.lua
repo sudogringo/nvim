@@ -10,7 +10,7 @@ require('lazy').setup({
   --
   -- Use `opts = {}` to force a plugin to be loaded.
   --
-  require 'kickstart/plugins/ccc',
+  -- require 'kickstart/plugins/ccc',
   require 'kickstart/plugins/gitsigns',
   require 'kickstart/plugins/which-key',
   require 'kickstart/plugins/telescope',
