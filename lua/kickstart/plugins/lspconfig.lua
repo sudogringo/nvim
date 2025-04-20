@@ -14,35 +14,6 @@ return {
   },
   { 'Bilal2453/luvit-meta', lazy = true },
 
-  -- {
-  --   'nvim-java/nvim-java',
-  --   ft = 'java',
-  --   config = function()
-  --     require('java').setup {
-  --       -- Your custom jdtls settings go here
-  --     }
-  --     require('lspconfig').jdtls.setup {
-  --       -- Your custom nvim-java configuration goes here
-  --       settings = {
-  --         java = {
-  --           configuration = {
-  --             runtimes = {
-  --               {
-  --                 name = 'JavaSE-17',
-  --                 path = '/opt/jdk-17',
-  --                 default = true,
-  --               },
-  --               {
-  --                 name = 'JavaSE-21',
-  --                 path = '/opt/jdk-21',
-  --               },
-  --             },
-  --           },
-  --         },
-  --       },
-  --     }
-  --   end,
-  -- },
   {
     -- Main LSP Configuration
     'neovim/nvim-lspconfig',
@@ -268,7 +239,7 @@ return {
         -- clangd = {},
         -- gopls = {},
         pyright = {},
-        -- jdtls = {},
+        jdtls = {},
         -- djlsp = {},
         -- ts_ls = {},
         html = {},
@@ -327,10 +298,41 @@ return {
           --   height = math.max(math.min(vim.o.lines * 0.5, 20), 10),
           -- }),
           function(server_name)
-            -- if server_name == 'jdtls' then
-            --   return
-            -- end
-            --
+            if server_name == 'jdtls' then
+              require('java').setup {
+                -- Your custom jdtls settings goes here
+                -- dependencies = {
+                --   'saghen/blink.cmp',
+                -- },
+                handlers = {
+                  ['$/progress'] = function(_, result, ctx)
+                    -- disable progress updates.
+                  end,
+                },
+              }
+
+              require('lspconfig').jdtls.setup {
+                -- Your custom nvim-java configuration goes here
+                settings = {
+                  java = {
+                    signatureHelp = { enabled = true },
+                    configuration = {
+                      runtimes = {
+                        {
+                          name = 'JavaSE-17',
+                          path = '/opt/jdk-17',
+                          default = true,
+                        },
+                        {
+                          name = 'JavaSE-21',
+                          path = '/opt/jdk-21',
+                        },
+                      },
+                    },
+                  },
+                },
+              }
+            end
             local server = servers[server_name] or {}
             -- This handles overriding only values explicitly passed
             -- by the server configuration above. Useful when disabling
@@ -338,45 +340,41 @@ return {
             server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
             require('lspconfig')[server_name].setup(server)
           end,
-          jdtls = function()
-            require('java').setup {
-              -- Your custom jdtls settings goes here
-              handlers = {
-                ['$/progress'] = function(_, result, ctx)
-                  -- disable progress updates.
-                end,
-                --   ['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-                --     border = 'single',
-                --     focusable = false,
-                --     relative = 'cursor',
-                --     width = math.max(math.min(vim.o.columns * 0.5, 80), 40),
-                --     height = math.max(math.min(vim.o.lines * 0.5, 20), 10),
-                --   }),
-              },
-            }
-
-            require('lspconfig').jdtls.setup {
-              -- Your custom nvim-java configuration goes here
-              settings = {
-                java = {
-                  signatureHelp = { enabled = true },
-                  configuration = {
-                    runtimes = {
-                      {
-                        name = 'JavaSE-17',
-                        path = '/opt/jdk-17',
-                        default = true,
-                      },
-                      {
-                        name = 'JavaSE-21',
-                        path = '/opt/jdk-21',
-                      },
-                    },
-                  },
-                },
-              },
-            }
-          end,
+          -- jdtls = function()
+          --   require('java').setup {
+          --     -- Your custom jdtls settings goes here
+          --     dependencies = {
+          --       'saghen/blink.cmp',
+          --     },
+          --     handlers = {
+          --       ['$/progress'] = function(_, result, ctx)
+          --         -- disable progress updates.
+          --       end,
+          --     },
+          --   }
+          --
+          --   require('lspconfig').jdtls.setup {
+          --     -- Your custom nvim-java configuration goes here
+          --     settings = {
+          --       java = {
+          --         signatureHelp = { enabled = true },
+          --         configuration = {
+          --           runtimes = {
+          --             {
+          --               name = 'JavaSE-17',
+          --               path = '/opt/jdk-17',
+          --               default = true,
+          --             },
+          --             {
+          --               name = 'JavaSE-21',
+          --               path = '/opt/jdk-21',
+          --             },
+          --           },
+          --         },
+          --       },
+          --     },
+          --   }
+          -- end,
         },
       }
     end,
