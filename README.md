@@ -7,9 +7,9 @@ My config of NeoVim.
 Coming from Vim, still learning the ropes.
 
 Todo:
-[] Java language Server
-[] Java Project Creation commands
-[] Spell check keybinds
+[ ] Java language Server
+[ ] Java Project Creation commands
+[ ] Spell check keybinds
 
 
 Spell check:
@@ -25,13 +25,6 @@ z= -- Show recomendations
 ```
 
 ## Installation
-
-### Install Neovim
-
-Kickstart.nvim targets *only* the latest
-['stable'](https://github.com/neovim/neovim/releases/tag/stable) and latest
-['nightly'](https://github.com/neovim/neovim/releases/tag/nightly) of Neovim.
-If you are experiencing issues, please make sure you have the latest versions.
 
 ### Install External Dependencies
 
@@ -78,22 +71,8 @@ nvim
 That's it! Lazy will install all the plugins you have. Use `:Lazy` to view
 current plugin status. Hit `q` to close the window.
 
-Read through the `init.lua` file in your configuration folder for more
-information about extending and exploring Neovim. That also includes
-examples of adding popularly requested plugins.
-
 ### Getting Started
 
 [The Only Video You Need to Get Started with Neovim](https://youtu.be/m8C0Cq9Uv9o)
 
 * See [lazy.nvim uninstall](https://lazy.folke.io/usage#-uninstalling) information
-* The main purpose of kickstart is to serve as a teaching tool and a reference
-  configuration that someone can easily use to `git clone` as a basis for their own.
-  As you progress in learning Neovim and Lua, you might consider splitting `init.lua`
-  into smaller parts. A fork of kickstart that does this while maintaining the 
-  same functionality is available here:
-  * [kickstart-modular.nvim](https://github.com/dam9000/kickstart-modular.nvim)
-* Discussions on this topic can be found here:
-  * [Restructure the configuration](https://github.com/nvim-lua/kickstart.nvim/issues/218)
-  * [Reorganize init.lua into a multi-file setup](https://github.com/nvim-lua/kickstart.nvim/pull/473)
-
