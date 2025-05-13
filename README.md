@@ -7,9 +7,10 @@ My config of NeoVim.
 Coming from Vim, still learning the ropes.
 
 Todo:
-[ ] Java language Server
-[ ] Java Project Creation commands
-[ ] Spell check keybinds
+- [ ] Java language Server
+- [ ] Java Project Creation commands
+- [ ] Spell check keybinds
+
 
 
 Spell check:
