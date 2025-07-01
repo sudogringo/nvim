@@ -75,7 +75,7 @@ vim.api.nvim_create_autocmd('SpellFileMissing', {
 })
 
 function SetRandomColorscheme()
-  vim.cmd 'colorscheme randomhue'
+  vim.cmd 'colorscheme kanagawa-dragon'
   -- may change in future to all installed themes.
 end
 
