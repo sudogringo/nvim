@@ -60,7 +60,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
             map('<leader>ds', function() require('fzf-lua').lsp_document_symbols() end, '[D]ocument [S]ymbols')
             map('<leader>ws', function() require('fzf-lua').lsp_workspace_symbols() end, '[W]orkspace [S]ymbols')
             map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
-            map('<leader>ca', function() require('fzf-lua').lsp_code_action end, '[C]ode [A]ction', { 'n', 'x' })
+            map('<leader>ca', function() require('fzf-lua').lsp_code_action() end, '[C]ode [A]ction', { 'n', 'x' })
             map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
         end
     end,
