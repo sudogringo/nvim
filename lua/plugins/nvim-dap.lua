@@ -1,0 +1,207 @@
+-- "mfussenegger/nvim-dap",
+-- dependencies = {
+--   "leoluz/nvim-dap-go",
+--   "rcarriga/nvim-dap-ui",
+--   "theHamsta/nvim-dap-virtual-text",
+--   "nvim-neotest/nvim-nio",
+--   "williamboman/mason.nvim",
+-- },
+local dap = require "dap"
+local dapui = require "dapui"
+
+require("dapui").setup()
+-- require("dap-go").setup()
+
+require("nvim-dap-virtual-text").setup {
+}
+
+-- Handled by nvim-dap-go
+-- dap.adapters.go = {
+--   type = "server",
+--   port = "${port}",
+--   executable = {
+--     command = "dlv",
+--     args = { "dap", "-l", "127.0.0.1:${port}" },
+--   },
+-- }
+
+-- TODO! Add here debugger configs Python, Java, probs JS
+-- local elixir_ls_debugger = vim.fn.exepath "elixir-ls-debugger"
+--     if elixir_ls_debugger ~= "" then
+--     dap.adapters.mix_task = {
+--       type = "executable",
+--       command = elixir_ls_debugger,
+--     }
+--
+--     dap.configurations.elixir = {
+--       {
+--         type = "mix_task",
+--         name = "phoenix server",
+--         task = "phx.server",
+--         request = "launch",
+--         projectDir = "${workspaceFolder}",
+--         exitAfterTaskReturns = false,
+--         debugAutoInterpretAllModules = false,
+--       },
+--     }
+-- end
+
+require('mason-nvim-dap').setup {
+    -- Makes a best effort to setup the various debuggers with
+    -- reasonable debug configurations
+    automatic_installation = true,
+
+    -- You can provide additional configuration to the handlers,
+    -- see mason-nvim-dap README for more information
+    handlers = {},
+
+    -- You'll need to check that you have the required things installed
+    -- online, please don't ask me how to install them :)
+    ensure_installed = {
+        -- Update this to ensure that you have the debuggers for the langs you want
+        'delve',
+    },
+}
+
+dapui.setup {
+    -- Set icons to characters that are more likely to work in every terminal.
+    --    Feel free to remove or use ones that you like more! :)
+    --    Don't feel like these are good choices.
+    icons = { expanded = '▾', collapsed = '▸', current_frame = '*' },
+    controls = {
+        icons = {
+            pause = '⏸',
+            play = '▶',
+            step_into = '⏎',
+            step_over = '⏭',
+            step_out = '⏮',
+            step_back = 'b',
+            run_last = '▶▶',
+            terminate = '⏹',
+            disconnect = '⏏',
+        },
+    },
+}
+
+vim.keymap.set("n", "<space>b", dap.toggle_breakpoint)
+vim.keymap.set("n", "<space>gb", dap.run_to_cursor)
+
+-- Eval var under cursor
+vim.keymap.set("n", "<leader>?", function()
+    require("dapui").eval(nil, { enter = true })
+end)
+
+vim.keymap.set("n", "<F1>", dap.continue)
+vim.keymap.set("n", "<F2>", dap.step_into)
+vim.keymap.set("n", "<F3>", dap.step_over)
+vim.keymap.set("n", "<F4>", dap.step_out)
+vim.keymap.set("n", "<F5>", dap.step_back)
+vim.keymap.set("n", "<F13>", dap.restart)
+
+dap.listeners.before.attach.dapui_config = function()
+    ui.open()
+end
+dap.listeners.before.launch.dapui_config = function()
+    ui.open()
+end
+dap.listeners.before.event_terminated.dapui_config = function()
+    ui.close()
+end
+dap.listeners.before.event_exited.dapui_config = function()
+    ui.close()
+end
+
+dap.configurations.java = {
+    {
+        name = 'Debug Launch (2GB)',
+        type = 'java',
+        request = 'launch',
+        vmArgs = '' .. '-Xmx2g ',
+    },
+    {
+        name = 'Debug Attach (8000)',
+        type = 'java',
+        request = 'attach',
+        hostName = '127.0.0.1',
+        port = 8000,
+    },
+    {
+        name = 'Debug Attach (5005)',
+        type = 'java',
+        request = 'attach',
+        hostName = '127.0.0.1',
+        port = 5005,
+    },
+    {
+        name = 'My Custom Java Run Configuration',
+        type = 'java',
+        request = 'launch',
+        -- You need to extend the classPath to list your dependencies.
+        -- `nvim-jdtls` would automatically add the `classPaths` property if it is missing
+        -- classPaths = {},
+
+        -- If using multi-module projects, remove otherwise.
+        -- projectName = "yourProjectName",
+
+        -- javaExec = "java",
+        mainClass = 'replace.with.your.fully.qualified.MainClass',
+
+        -- If using the JDK9+ module system, this needs to be extended
+        -- `nvim-jdtls` would automatically populate this property
+        -- modulePaths = {},
+        vmArgs = '' .. '-Xmx2g ',
+    },
+}
+
+-- Python configuration
+dap.adapters.python = function(cb, config)
+  if config.request == 'attach' then
+    ---@diagnostic disable-next-line: undefined-field
+    local port = (config.connect or config).port
+    ---@diagnostic disable-next-line: undefined-field
+    local host = (config.connect or config).host or '127.0.0.1'
+    cb({
+      type = 'server',
+      port = assert(port, '`connect.port` is required for a python `attach` configuration'),
+      host = host,
+      options = {
+        source_filetype = 'python',
+      },
+    })
+  else
+    cb({
+      type = 'executable',
+      command = 'path/to/virtualenvs/debugpy/bin/python',
+      args = { '-m', 'debugpy.adapter' },
+      options = {
+        source_filetype = 'python',
+      },
+    })
+  end
+end
+
+dap.configurations.python = {
+  {
+    -- The first three options are required by nvim-dap
+    type = 'python'; -- the type here established the link to the adapter definition: `dap.adapters.python`
+    request = 'launch';
+    name = "Launch file";
+
+    -- Options below are for debugpy, see https://github.com/microsoft/debugpy/wiki/Debug-configuration-settings for supported options
+
+    program = "${file}"; -- This configuration will launch the current file if used.
+    pythonPath = function()
+      -- debugpy supports launching an application with a different interpreter then the one used to launch debugpy itself.
+      -- The code below looks for a `venv` or `.venv` folder in the current directly and uses the python within.
+      -- You could adapt this - to for example use the `VIRTUAL_ENV` environment variable.
+      local cwd = vim.fn.getcwd()
+      if vim.fn.executable(cwd .. '/venv/bin/python') == 1 then
+        return cwd .. '/venv/bin/python'
+      elseif vim.fn.executable(cwd .. '/.venv/bin/python') == 1 then
+        return cwd .. '/.venv/bin/python'
+      else
+        return '/usr/bin/python'
+      end
+    end;
+  },
+}

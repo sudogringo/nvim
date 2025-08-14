@@ -1,47 +1,32 @@
 --[[
-
-=====================================================================
-==================== READ THIS BEFORE CONTINUING ====================
-=====================================================================
-========                                    .-----.          ========
-========         .----------------------.   | === |          ========
-========         |.-""""""""""""""""""-.|   |-----|          ========
-========         ||                    ||   | === |          ========
-========         ||   KICKSTART.NVIM   ||   |-----|          ========
-========         ||                    ||   | === |          ========
-========         ||                    ||   |-----|          ========
-========         ||:Tutor              ||   |:::::|          ========
-========         |'-..................-'|   |____o|          ========
-========         `"")----------------(""`   ___________      ========
-========        /::::::::::|  |::::::::::\  \ no mouse \     ========
-========       /:::========|  |==hjkl==:::\  \ required \    ========
-========      '""""""""""""'  '""""""""""""'  '""""""""""'   ========
-========                                                     ========
-=====================================================================
-=====================================================================
-
-]]
+ ███▄    █ ▓█████  ▒█████   ██▒   █▓ ██▓ ███▄ ▄███▓
+ ██ ▀█   █ ▓█   ▀ ▒██▒  ██▒▓██░   █▒▓██▒▓██▒▀█▀ ██▒
+▓██  ▀█ ██▒▒███   ▒██░  ██▒ ▓██  █▒░▒██▒▓██    ▓██░
+▓██▒  ▐▌██▒▒▓█  ▄ ▒██   ██░  ▒██ █░░░██░▒██    ▒██ 
+▒██░   ▓██░░▒████▒░ ████▓▒░   ▒▀█░  ░██░▒██▒   ░██▒
+░ ▒░   ▒ ▒ ░░ ▒░ ░░ ▒░▒░▒░    ░ ▐░  ░▓  ░ ▒░   ░  ░
+░ ░░   ░ ▒░ ░ ░  ░  ░ ▒ ▒░    ░ ░░   ▒ ░░  ░      ░
+   ░   ░ ░    ░   ░ ░ ░ ▒       ░░   ▒ ░░      ░   
+         ░    ░  ░    ░ ░        ░   ░         ░   
+                                ░                  
+ ▄████▄   ▒█████   ███▄    █   █████▒██▓  ▄████    
+▒██▀ ▀█  ▒██▒  ██▒ ██ ▀█   █ ▓██   ▒▓██▒ ██▒ ▀█▒   
+▒▓█    ▄ ▒██░  ██▒▓██  ▀█ ██▒▒████ ░▒██▒▒██░▄▄▄░   
+▒▓▓▄ ▄██▒▒██   ██░▓██▒  ▐▌██▒░▓█▒  ░░██░░▓█  ██▓   
+▒ ▓███▀ ░░ ████▓▒░▒██░   ▓██░░▒█░   ░██░░▒▓███▀▒   
+░ ░▒ ▒  ░░ ▒░▒░▒░ ░ ▒░   ▒ ▒  ▒ ░   ░▓   ░▒   ▒    
+  ░  ▒     ░ ▒ ▒░ ░ ░░   ░ ▒░ ░      ▒ ░  ░   ░    
+░        ░ ░ ░ ▒     ░   ░ ░  ░ ░    ▒ ░░ ░   ░    
+░ ░          ░ ░           ░         ░        ░    
+░                                                  ]]
 --
 
--- Set <space> as the leader key
--- See `:help mapleader`
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
 
--- Set to true if you have a Nerd Font installed and selected in the terminal
-vim.g.have_nerd_font = true
-
--- [[ Setting options ]]
 require 'options'
-
--- [[ Basic Keymaps ]]
 require 'keymaps'
-
--- [[ Install `lazy.nvim` plugin manager ]]
-require 'lazy-bootstrap'
-
--- [[ Configure and install plugins ]]
-require 'lazy-plugins'
+require 'autocmd'
+require 'plugins'
+require 'lsp'
 
 -- Base URL for the spell files
 local spellfile_URL = 'https://ftp.nluug.nl/vim/runtime/spell'
@@ -65,23 +50,10 @@ function Download_spell_file(lang)
   vim.opt_local.spelllang = lang
 end
 
--- Create the autocommand
-vim.api.nvim_create_autocmd('SpellFileMissing', {
-  pattern = '*',
-  callback = function()
-    local lang = vim.fn.expand '<amatch>'
-    Download_spell_file(lang)
-  end,
-})
-
-function SetRandomColorscheme()
-  vim.cmd 'colorscheme kanagawa-dragon'
-  -- may change in future to all installed themes.
+-- Create undo directory if it doesn't exist
+local undodir = vim.fn.expand("~/.vim/undodir")
+if vim.fn.isdirectory(undodir) == 0 then
+  vim.fn.mkdir(undodir, "p")
 end
-
--- Set a random colorscheme on startup
-vim.api.nvim_create_autocmd('VimEnter', {
-  callback = SetRandomColorscheme,
-})
 -- -- The line beneath this is called `modeline`. See `:help modeline`
 -- -- vim: ts=2 sts=2 sw=2 et
