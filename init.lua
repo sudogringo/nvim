@@ -28,9 +28,7 @@ require 'config.plugins'
 require 'config.keymaps'
 require 'config.lsp'
 
-require("fzf-lua").register_ui_select()
-
-vim.env.JAVA_HOME = "/usr/lib/jvm/java-21-openjdk"
+-- vim.env.JAVA_HOME = "/usr/lib/jvm/java-21-openjdk"
 -- Base URL for the spell files
 local spellfile_URL = 'https://ftp.nluug.nl/vim/runtime/spell'
 

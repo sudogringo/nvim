@@ -2,31 +2,34 @@ local home = os.getenv("HOME")
 -- local jdtls_path = vim.fn.glob(home .. "/.local/share/nvim/mason/packages/jdtls")
 local jdtls_path = vim.fn.stdpath('data') .. '/mason/packages/jdtls'
 local launcher = vim.fn.glob(home .. "/.local/share/nvim/mason/packages/jdtls/plugins/org.eclipse.equinox.launcher_*.jar", "1")
+-- local launcher = vim.fn.glob(home .. "/.local/share/nvim/mason/share/jdtls/plugins/org.eclipse.equinox.launcher.jar", "1")
+-- local launcher = vim.fn.glob("$MASON/packages/jdtls/plugins/org.eclipse.equinox.launcher.jar", "1")
 local root_dir = require("jdtls.setup").find_root({ ".git", "build.gradle", "pom.xml" }) or vim.fn.getcwd()
 local workspace_path = home .. "/.cache/jdtls/" .. vim.fn.fnamemodify(root_dir, ":p:h:t")
 local keymaps = require('config.keymaps')
 -- Ensure workspace directory exists
--- os.execute("mkdir -p " .. workspace_path)
+os.execute("mkdir -p " .. workspace_path)
 
 vim.env.JAVA_HOME = vim.env.JAVA_HOME or "/usr/lib/jvm/java-21-openjdk"
 
 -- vim.lsp.log.set_level("debug")
 
 local function ensure_java_debug_and_test()
-  local debug_path = vim.fn.stdpath('data') .. '/mason/packages/java-debug'
-  local test_path = vim.fn.stdpath('data') .. '/mason/packages/vscode-java-test'
+    local debug_path = vim.fn.stdpath('data') .. '/mason/packages/java-debug'
+    local test_path = vim.fn.stdpath('data') .. '/mason/packages/vscode-java-test'
 
-  -- Clone java-debug if not exists
-  if vim.fn.empty(vim.fn.glob(debug_path)) > 0 then
-    vim.fn.system({'git', 'clone', 'https://github.com/microsoft/java-debug.git', debug_path})
-    vim.fn.system({'/bin/sh', '-c', 'cd ' .. debug_path .. ' && ./mvnw clean install'})
-  end
+    -- Clone java-debug if not exists
+    if vim.fn.empty(vim.fn.glob(debug_path)) > 0 then
+        vim.fn.system({ 'git', 'clone', 'https://github.com/microsoft/java-debug.git', debug_path })
+        vim.fn.system({ '/bin/sh', '-c', 'cd ' .. debug_path .. ' && ./mvnw clean install' })
+    end
 
-  -- Clone vscode-java-test if not exists
-  if vim.fn.empty(vim.fn.glob(test_path)) > 0 then
-    vim.fn.system({'git', 'clone', 'https://github.com/microsoft/vscode-java-test.git', test_path})
-    vim.fn.system({'/bin/sh', '-c', 'cd ' .. test_path .. ' && npm install --legacy-peer-deps && npx gulp vsCodeJavaTestServer'})
-  end
+    -- Clone vscode-java-test if not exists
+    if vim.fn.empty(vim.fn.glob(test_path)) > 0 then
+        vim.fn.system({ 'git', 'clone', 'https://github.com/microsoft/vscode-java-test.git', test_path })
+        vim.fn.system({ '/bin/sh', '-c', 'cd ' ..
+        test_path .. ' && npm install --legacy-peer-deps && npx gulp vsCodeJavaTestServer' })
+    end
 end
 
 
@@ -101,8 +104,8 @@ local config = {
         },
         bundles = {
             vim.fn.glob(
-            vim.fn.stdpath('data') ..
-            '/mason/packages/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-*.jar',
+                vim.fn.stdpath('data') ..
+                '/mason/packages/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-*.jar',
                 true),
         },
     },

@@ -4,22 +4,14 @@
 -- The configuration is found in the lsp folder inside the nvim config folder,
 -- so in ~.config/lsp/lua_ls.lua for lua_ls, for example.
 --
--- vim.lsp.enable('lua_ls')
-if vim.b.disable_mason_lsp == false then
-    require('mason').setup()
-end
--- require('mason').setup()
--- require('mason-tool-installer').setup({
---     ensure_installed = {
---         "lua_ls",
---         "stylua",
---         "pyright",
---         "html",
---     }
--- })
+require('mason').setup()
 
-vim.lsp.log.set_level 'trace'
-vim.lsp.enable('lua_ls')
+-- vim.lsp.log.set_level 'trace'
+vim.lsp.enable({
+    'lua_ls',
+    'ts_ls',
+    'bashls',
+})
 
 vim.api.nvim_create_autocmd('LspAttach', {
     callback = function(ev)
