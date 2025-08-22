@@ -5,10 +5,13 @@ vim.pack.add({
         version = "master",
     },
 
-	{ src = "https://github.com/neovim/nvim-lspconfig" },
+	-- { src = "https://github.com/neovim/nvim-lspconfig" },
 	{ src = "https://github.com/mason-org/mason.nvim" },
-	{ src = "https://github.com/mason-org/mason-lspconfig.nvim" },
-	{ src = "https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim" },
+	-- { src = "https://github.com/mason-org/mason-registry" },
+	-- { src = "https://github.com/mason-org/mason-lspconfig.nvim" },
+	-- { src = "https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim" },
+	{ src = "https://github.com/mfussenegger/nvim-jdtls" },
+
 
     { src = "https://github.com/rcarriga/nvim-dap-ui" },
     { src = "https://github.com/theHamsta/nvim-dap-virtual-text" },

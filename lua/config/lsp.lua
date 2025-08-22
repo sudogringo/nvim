@@ -1,0 +1,51 @@
+-- lsp
+--------------------------------------------------------------------------------
+-- This actually just enables the lsp servers.
+-- The configuration is found in the lsp folder inside the nvim config folder,
+-- so in ~.config/lsp/lua_ls.lua for lua_ls, for example.
+--
+-- vim.lsp.enable('lua_ls')
+if vim.b.disable_mason_lsp == false then
+    require('mason').setup()
+end
+-- require('mason').setup()
+-- require('mason-tool-installer').setup({
+--     ensure_installed = {
+--         "lua_ls",
+--         "stylua",
+--         "pyright",
+--         "html",
+--     }
+-- })
+
+vim.lsp.log.set_level 'trace'
+vim.lsp.enable('lua_ls')
+
+vim.api.nvim_create_autocmd('LspAttach', {
+    callback = function(ev)
+        local client = vim.lsp.get_client_by_id(ev.data.client_id)
+        if client and client.name == 'jdtls' then
+            return
+        end
+        if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_completion) then
+            vim.opt.completeopt = { 'menu', 'menuone', 'noinsert', 'fuzzy', 'popup' }
+            vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
+            vim.keymap.set('i', '<C-Space>', function()
+                vim.lsp.completion.get()
+            end)
+            require('config.keymaps').setup_lsp_keymaps(ev.buf)
+        end
+    end,
+})
+
+-- Diagnostics
+vim.diagnostic.config({
+    -- Use the default configuration
+    -- virtual_lines = true
+
+    -- Alternatively, customize specific options
+    virtual_lines = {
+        -- Only show virtual line diagnostics for the current cursor line
+        current_line = true,
+    },
+})

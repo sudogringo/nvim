@@ -15,37 +15,6 @@ require("dapui").setup()
 require("nvim-dap-virtual-text").setup {
 }
 
--- Handled by nvim-dap-go
--- dap.adapters.go = {
---   type = "server",
---   port = "${port}",
---   executable = {
---     command = "dlv",
---     args = { "dap", "-l", "127.0.0.1:${port}" },
---   },
--- }
-
--- TODO! Add here debugger configs Python, Java, probs JS
--- local elixir_ls_debugger = vim.fn.exepath "elixir-ls-debugger"
---     if elixir_ls_debugger ~= "" then
---     dap.adapters.mix_task = {
---       type = "executable",
---       command = elixir_ls_debugger,
---     }
---
---     dap.configurations.elixir = {
---       {
---         type = "mix_task",
---         name = "phoenix server",
---         task = "phx.server",
---         request = "launch",
---         projectDir = "${workspaceFolder}",
---         exitAfterTaskReturns = false,
---         debugAutoInterpretAllModules = false,
---       },
---     }
--- end
-
 require('mason-nvim-dap').setup {
     -- Makes a best effort to setup the various debuggers with
     -- reasonable debug configurations
@@ -53,7 +22,14 @@ require('mason-nvim-dap').setup {
 
     -- You can provide additional configuration to the handlers,
     -- see mason-nvim-dap README for more information
-    handlers = {},
+    handlers = {
+        function(config)
+          -- all sources with no handler get passed here
+
+          -- Keep original functionality
+          require('mason-nvim-dap').default_setup(config)
+        end,
+    },
 
     -- You'll need to check that you have the required things installed
     -- online, please don't ask me how to install them :)
@@ -99,16 +75,16 @@ vim.keymap.set("n", "<F5>", dap.step_back)
 vim.keymap.set("n", "<F13>", dap.restart)
 
 dap.listeners.before.attach.dapui_config = function()
-    ui.open()
+    dapui.open()
 end
 dap.listeners.before.launch.dapui_config = function()
-    ui.open()
+    dapui.open()
 end
 dap.listeners.before.event_terminated.dapui_config = function()
-    ui.close()
+    dapui.close()
 end
 dap.listeners.before.event_exited.dapui_config = function()
-    ui.close()
+    dapui.close()
 end
 
 dap.configurations.java = {
@@ -144,7 +120,7 @@ dap.configurations.java = {
         -- projectName = "yourProjectName",
 
         -- javaExec = "java",
-        mainClass = 'replace.with.your.fully.qualified.MainClass',
+        -- mainClass = 'replace.with.your.fully.qualified.MainClass',
 
         -- If using the JDK9+ module system, this needs to be extended
         -- `nvim-jdtls` would automatically populate this property
@@ -153,55 +129,55 @@ dap.configurations.java = {
     },
 }
 
--- Python configuration
-dap.adapters.python = function(cb, config)
-  if config.request == 'attach' then
-    ---@diagnostic disable-next-line: undefined-field
-    local port = (config.connect or config).port
-    ---@diagnostic disable-next-line: undefined-field
-    local host = (config.connect or config).host or '127.0.0.1'
-    cb({
-      type = 'server',
-      port = assert(port, '`connect.port` is required for a python `attach` configuration'),
-      host = host,
-      options = {
-        source_filetype = 'python',
-      },
-    })
-  else
-    cb({
-      type = 'executable',
-      command = 'path/to/virtualenvs/debugpy/bin/python',
-      args = { '-m', 'debugpy.adapter' },
-      options = {
-        source_filetype = 'python',
-      },
-    })
-  end
-end
-
-dap.configurations.python = {
-  {
-    -- The first three options are required by nvim-dap
-    type = 'python'; -- the type here established the link to the adapter definition: `dap.adapters.python`
-    request = 'launch';
-    name = "Launch file";
-
-    -- Options below are for debugpy, see https://github.com/microsoft/debugpy/wiki/Debug-configuration-settings for supported options
-
-    program = "${file}"; -- This configuration will launch the current file if used.
-    pythonPath = function()
-      -- debugpy supports launching an application with a different interpreter then the one used to launch debugpy itself.
-      -- The code below looks for a `venv` or `.venv` folder in the current directly and uses the python within.
-      -- You could adapt this - to for example use the `VIRTUAL_ENV` environment variable.
-      local cwd = vim.fn.getcwd()
-      if vim.fn.executable(cwd .. '/venv/bin/python') == 1 then
-        return cwd .. '/venv/bin/python'
-      elseif vim.fn.executable(cwd .. '/.venv/bin/python') == 1 then
-        return cwd .. '/.venv/bin/python'
-      else
-        return '/usr/bin/python'
-      end
-    end;
-  },
-}
+-- -- Python configuration
+-- dap.adapters.python = function(cb, config)
+--   if config.request == 'attach' then
+--     ---@diagnostic disable-next-line: undefined-field
+--     local port = (config.connect or config).port
+--     ---@diagnostic disable-next-line: undefined-field
+--     local host = (config.connect or config).host or '127.0.0.1'
+--     cb({
+--       type = 'server',
+--       port = assert(port, '`connect.port` is required for a python `attach` configuration'),
+--       host = host,
+--       options = {
+--         source_filetype = 'python',
+--       },
+--     })
+--   else
+--     cb({
+--       type = 'executable',
+--       command = 'path/to/virtualenvs/debugpy/bin/python',
+--       args = { '-m', 'debugpy.adapter' },
+--       options = {
+--         source_filetype = 'python',
+--       },
+--     })
+--   end
+-- end
+--
+-- dap.configurations.python = {
+--   {
+--     -- The first three options are required by nvim-dap
+--     type = 'python'; -- the type here established the link to the adapter definition: `dap.adapters.python`
+--     request = 'launch';
+--     name = "Launch file";
+--
+--     -- Options below are for debugpy, see https://github.com/microsoft/debugpy/wiki/Debug-configuration-settings for supported options
+--
+--     program = "${file}"; -- This configuration will launch the current file if used.
+--     pythonPath = function()
+--       -- debugpy supports launching an application with a different interpreter then the one used to launch debugpy itself.
+--       -- The code below looks for a `venv` or `.venv` folder in the current directly and uses the python within.
+--       -- You could adapt this - to for example use the `VIRTUAL_ENV` environment variable.
+--       local cwd = vim.fn.getcwd()
+--       if vim.fn.executable(cwd .. '/venv/bin/python') == 1 then
+--         return cwd .. '/venv/bin/python'
+--       elseif vim.fn.executable(cwd .. '/.venv/bin/python') == 1 then
+--         return cwd .. '/.venv/bin/python'
+--       else
+--         return '/usr/bin/python'
+--       end
+--     end;
+--   },
+-- }

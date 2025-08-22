@@ -43,3 +43,13 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
+vim.api.nvim_create_user_command(
+  'CleanJdtls',
+  function()
+    vim.fn.delete(vim.fn.expand('~/.cache/nvim/jdtls'), 'rf')
+    vim.fn.delete(vim.fn.expand('~/.cache/jdtls'), 'rf')
+    vim.fn.delete(vim.fn.expand('~/.local/share/jdtls'), 'rf')
+    print('Deleted cache!')
+  end,
+  {}
+)
