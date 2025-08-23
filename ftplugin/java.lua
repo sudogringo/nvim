@@ -1,6 +1,7 @@
 local home = os.getenv("HOME")
 local jdtls_path = vim.fn.stdpath('data') .. '/mason/packages/jdtls'
-local launcher = vim.fn.glob(home .. "/.local/share/nvim/mason/packages/jdtls/plugins/org.eclipse.equinox.launcher_*.jar", "1")
+local launcher = vim.fn.glob(
+    home .. "/.local/share/nvim/mason/packages/jdtls/plugins/org.eclipse.equinox.launcher_*.jar", "1")
 -- local launcher = vim.fn.glob("$MASON/packages/jdtls/plugins/org.eclipse.equinox.launcher.jar", "1")
 local root_dir = require("jdtls.setup").find_root({ ".git", "build.gradle", "pom.xml" }) or vim.fn.getcwd()
 local workspace_path = home .. "/.cache/jdtls/" .. vim.fn.fnamemodify(root_dir, ":p:h:t")
@@ -27,10 +28,16 @@ local function ensure_java_debug_and_test()
     if vim.fn.empty(vim.fn.glob(test_path)) > 0 then
         vim.fn.system({ 'git', 'clone', 'https://github.com/microsoft/vscode-java-test.git', test_path })
         vim.fn.system({ '/bin/sh', '-c', 'cd ' ..
-        test_path .. ' && npm install --legacy-peer-deps && npx gulp vsCodeJavaTestServer' })
+        test_path .. ' && npm install && npm run build-plugin' })
     end
 end
 
+local bundles = {
+    vim.fn.glob(
+        vim.fn.stdpath('data') .. '/javaDebug/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-*.jar', true),
+    vim.fn.glob(
+        vim.fn.stdpath('data') .. '/javaDebug/vscode-java-test/server/com.microsoft.java.debug.plugin-*.jar', true),
+};
 
 local config = {
     cmd = {
@@ -102,10 +109,11 @@ local config = {
             }
         },
         bundles = {
-            vim.fn.glob(
-                vim.fn.stdpath('data') ..
-                '/mason/packages/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-*.jar',
-                true),
+            -- vim.fn.glob(
+            --     vim.fn.stdpath('data') ..
+            --     '/mason/packages/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-*.jar',
+            --     true),
+            bundles = bundles,
         },
     },
     on_attach = function(client, bufnr)
@@ -115,7 +123,9 @@ local config = {
         -- require('jdtls').setup.add_commands()
     end,
 }
-vim.b.disable_mason_lsp = true
+-- config['init_options'] = {
+--   bundles = bundles;
+-- }
 -- Call the function when setting up jdtls
-ensure_java_debug_and_test()
+-- ensure_java_debug_and_test()
 require("jdtls").start_or_attach(config)
