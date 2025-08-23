@@ -57,6 +57,7 @@ local function setup_lsp_keymaps(bufnr)
     end, { buffer = bufnr })
 end
 
+vim.keymap.set("n", "<leader>-", "<cmd>NvimTreeToggle<CR>")
 -- Add language spell check
 vim.keymap.set('n', '<leader>dS', '<cmd>setlocal spell! spelllang=es<CR>', { desc = 'Spelling ES_UTF' })
 vim.keymap.set('n', '<leader>dE', '<cmd>setlocal spell! spelllang=en_us<CR>', { desc = 'Spelling EN_US' })

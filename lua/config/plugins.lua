@@ -1,5 +1,6 @@
 vim.pack.add({
     { src = "https://github.com/ibhagwan/fzf-lua" },
+    { src = "https://github.com/nvim-tree/nvim-tree.lua" },
     {
         src = "https://github.com/nvim-treesitter/nvim-treesitter",
         version = "master",
@@ -30,3 +31,5 @@ require 'plugins.fzf-lua'
 require 'plugins.nvim-treesitter'
 require 'plugins.nvim-dap'
 require 'plugins.blink'
+
+require("nvim-tree").setup()

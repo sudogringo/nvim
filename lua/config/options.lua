@@ -18,6 +18,10 @@ vim.opt.mouse = 'a'
 
 vim.opt.showmode = false
 
+-- disable netwr
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 -- Sync clipboard between OS and Neovim.
 --  Schedule the setting after `UiEnter` because it can increase startup-time.
 --  Remove this option if you want your OS clipboard to remain independent.

@@ -7,10 +7,48 @@
 require('mason').setup()
 
 -- vim.lsp.log.set_level 'trace'
+local home = os.getenv("HOME")
+local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
+local workspace_path = home .. "/.cache/jdtls/" .. project_name
+vim.lsp.config("jdtls", {
+    cmd = {
+        'jdtls',
+        '-data', workspace_path,
+    },
+    capabilities = vim.lsp.protocol.make_client_capabilities(),
+    root_dir = vim.fs.root(0, { 'gradlew', '.git', 'mvnw' }),
+    settings = {
+        java = {
+            signatureHelp = { enabled = true },
+        },
+        contentProvider = { preferred = "fernflower" },
+        completion = {
+            favoriteStaticMembers = {
+                "org.junit.Assert.*",
+                "org.junit.Assume.*",
+                "org.junit.jupiter.api.Assertions.*",
+                "org.junit.jupiter.api.Assumptions.*",
+            },
+        },
+        sources = {
+            organizeImports = {
+                starThreshold = 9999,
+                staticStarThreshold = 9999,
+            },
+        },
+        codeGeneration = {
+            toString = {
+                template = "${object.className}{${member.name()}=${member.value}, ${otherMembers}}",
+            },
+        },
+
+    },
+})
 vim.lsp.enable({
     'lua_ls',
     'ts_ls',
     'bashls',
+    'jdtls',
 })
 
 vim.api.nvim_create_autocmd('LspAttach', {
