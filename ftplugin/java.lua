@@ -1,12 +1,11 @@
 local home = os.getenv("HOME")
--- local jdtls_path = vim.fn.glob(home .. "/.local/share/nvim/mason/packages/jdtls")
 local jdtls_path = vim.fn.stdpath('data') .. '/mason/packages/jdtls'
 local launcher = vim.fn.glob(home .. "/.local/share/nvim/mason/packages/jdtls/plugins/org.eclipse.equinox.launcher_*.jar", "1")
--- local launcher = vim.fn.glob(home .. "/.local/share/nvim/mason/share/jdtls/plugins/org.eclipse.equinox.launcher.jar", "1")
 -- local launcher = vim.fn.glob("$MASON/packages/jdtls/plugins/org.eclipse.equinox.launcher.jar", "1")
 local root_dir = require("jdtls.setup").find_root({ ".git", "build.gradle", "pom.xml" }) or vim.fn.getcwd()
 local workspace_path = home .. "/.cache/jdtls/" .. vim.fn.fnamemodify(root_dir, ":p:h:t")
 local keymaps = require('config.keymaps')
+--
 -- Ensure workspace directory exists
 os.execute("mkdir -p " .. workspace_path)
 

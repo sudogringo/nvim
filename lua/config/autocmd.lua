@@ -53,3 +53,12 @@ vim.api.nvim_create_user_command(
   end,
   {}
 )
+
+vim.api.nvim_create_user_command(
+  'ClearMason',
+  function()
+    vim.fn.delete(vim.fn.expand('~/.local/share/nvim/mason'), 'rf')
+    print('Deleted mason!')
+  end,
+  {}
+)
