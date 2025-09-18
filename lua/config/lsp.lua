@@ -10,14 +10,24 @@ require('mason').setup()
 local home = os.getenv("HOME")
 local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
 local workspace_path = home .. "/.cache/jdtls/" .. project_name
+local jdtls_install_path = vim.fn.stdpath 'data' .. '/mason/packages/jdtls'
+local lombok_path = jdtls_install_path .. '/lombok.jar'
 vim.lsp.config("jdtls", {
     cmd = {
         'jdtls',
         '-data', workspace_path,
+        '-javaagent:', lombok_path,
     },
     capabilities = vim.lsp.protocol.make_client_capabilities(),
     root_dir = vim.fs.root(0, { 'gradlew', '.git', 'mvnw' }),
     settings = {
+        eclipse = {
+            downloadSources = true,
+        },
+        maven = {
+            downloadSources = true,
+        },
+        signatureHelp = { enabled = true },
         java = {
             signatureHelp = { enabled = true },
         },
@@ -49,14 +59,12 @@ vim.lsp.enable({
     'ts_ls',
     'bashls',
     'jdtls',
+    'pyright',
 })
 
 vim.api.nvim_create_autocmd('LspAttach', {
     callback = function(ev)
         local client = vim.lsp.get_client_by_id(ev.data.client_id)
-        if client and client.name == 'jdtls' then
-            return
-        end
         if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_completion) then
             vim.opt.completeopt = { 'menu', 'menuone', 'noinsert', 'fuzzy', 'popup' }
             vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
