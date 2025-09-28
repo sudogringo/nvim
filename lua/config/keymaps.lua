@@ -53,7 +53,7 @@ local function setup_lsp_keymaps(bufnr)
     map('<leader>ca', function() require('fzf-lua').lsp_code_actions() end, '[C]ode [A]ction', { 'n', 'x' })
     map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
     vim.keymap.set('i', '<C-Space>', function()
-        vim.lsp.completion.get()
+        vim.lsp.completion.trigger()
     end, { buffer = bufnr })
 end
 
