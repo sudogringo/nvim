@@ -12,6 +12,7 @@ vim.pack.add({
     -- { src = "https://github.com/mason-org/mason-lspconfig.nvim" },
     -- { src = "https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim" },
     { src = "https://github.com/mfussenegger/nvim-jdtls" },
+    { src = "https://github.com/brianhuster/live-preview.nvim" },
 
 
     { src = "https://github.com/rcarriga/nvim-dap-ui" },
