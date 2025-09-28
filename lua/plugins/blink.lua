@@ -14,4 +14,8 @@ require("blink.cmp").setup({
             },
         },
     },
+    keymap = {
+        menu = {
+        }
+    }
 })
