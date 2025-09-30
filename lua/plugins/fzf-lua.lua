@@ -1,7 +1,6 @@
 require("fzf-lua").setup({
     { 'ivy' },
     files = {
-        cmd = 'fd --type f --exclude "*.class, .git/*"',
     },
     buffers = {
         previewer = false, -- Disable preview for buffers
