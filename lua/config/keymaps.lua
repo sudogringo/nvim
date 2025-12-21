@@ -6,7 +6,12 @@
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Diagnostic keymaps
-vim.keymap.set('n', '<leader>ff', vim.lsp.buf.format)
+-- vim.keymap.set('n', '<leader>ff', vim.lsp.buf.format)
+vim.keymap.set("n", "<leader>ff", function()
+  require("conform").format({
+    lsp_format = "fallback",
+  })
+end, { desc = "Format buffer" })
 vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action)
 
 local fzf = require('fzf-lua')

@@ -8,8 +8,9 @@ vim.g.maplocalleader = ' '
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
+vim.o.background = 'dark'
 -- vim.cmd.colorscheme("lunaperche")
-vim.cmd.colorscheme("retrobox")
+vim.cmd.colorscheme 'retrobox'
 
 vim.opt.number = true
 vim.opt.relativenumber = true
@@ -100,11 +101,11 @@ vim.opt.foldlevel = 99 -- Start with all folds open
 
 -- Command-line completion
 vim.opt.wildmenu = true
-vim.opt.wildmode = "longest:full,full"
-vim.opt.wildignore:append({ "*.o", "*.obj", "*.pyc", "*.class", "*.jar" })
+vim.opt.wildmode = 'longest:full,full'
+vim.opt.wildignore:append { '*.o', '*.obj', '*.pyc', '*.class', '*.jar' }
 
 -- Better diff options
-vim.opt.diffopt:append("linematch:60")
+vim.opt.diffopt:append 'linematch:60'
 
 -- Performance improvements
 vim.opt.redrawtime = 10000

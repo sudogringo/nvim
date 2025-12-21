@@ -59,7 +59,10 @@ vim.lsp.enable({
     'ts_ls',
     'bashls',
     'jdtls',
+    'html',
+    'cssls',
     'pyright',
+
 })
 
 vim.api.nvim_create_autocmd('LspAttach', {

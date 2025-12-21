@@ -1,0 +1,39 @@
+{
+  "plugins": {
+    "blink.cmp": {
+      "version": "'v1.6.0'"
+    },
+    "conform.nvim": {
+      "rev": "328c2f1",
+      "src": "https://github.com/stevearc/conform.nvim"
+    },
+    "fzf-lua": [],
+    "gitsigns.nvim": [],
+    "live-preview.nvim": [],
+    "lualine.nvim": [],
+    "mason-nvim-dap.nvim": [],
+    "mason.nvim": [],
+    "nvim-dap": [],
+    "nvim-dap-ui": [],
+    "nvim-dap-virtual-text": [],
+    "nvim-jdtls": [],
+    "nvim-lspconfig": [],
+    "nvim-nio": [],
+    "nvim-tree.lua": [],
+    "nvim-treesitter": {
+      "version": "'master'"
+    },
+    "plenary.nvim": {
+      "rev": "b9fd522",
+      "src": "https://github.com/nvim-lua/plenary.nvim"
+    },
+    "smear-cursor.nvim": {
+      "rev": "c85bdbb",
+      "src": "https://github.com/sphamba/smear-cursor.nvim"
+    },
+    "todo-comments.nvim": {
+      "rev": "31e3c38",
+      "src": "https://github.com/folke/todo-comments.nvim"
+    }
+  }
+}
