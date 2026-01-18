@@ -27,6 +27,7 @@ vim.pack.add {
   { src = 'https://github.com/nvim-lua/plenary.nvim' }, -- dependency for todo-comments
   { src = 'https://github.com/folke/todo-comments.nvim' },
   { src = 'https://github.com/sphamba/smear-cursor.nvim' },
+  { src = 'https://github.com/nyoom-engineering/oxocarbon.nvim' },
 }
 
 require 'plugins.fzf-lua'

@@ -1,27 +1,86 @@
 {
   "plugins": {
     "blink.cmp": {
+      "rev": "bae4bae0eedd1fa55f34b685862e94a222d5c6f8",
+      "src": "https://github.com/Saghen/blink.cmp",
       "version": "'v1.6.0'"
     },
     "conform.nvim": {
       "rev": "328c2f1",
       "src": "https://github.com/stevearc/conform.nvim"
     },
-    "fzf-lua": [],
-    "gitsigns.nvim": [],
-    "live-preview.nvim": [],
-    "lualine.nvim": [],
-    "mason-nvim-dap.nvim": [],
-    "mason.nvim": [],
-    "nvim-dap": [],
-    "nvim-dap-ui": [],
-    "nvim-dap-virtual-text": [],
-    "nvim-jdtls": [],
-    "nvim-lspconfig": [],
-    "nvim-nio": [],
-    "nvim-tree.lua": [],
+    "fzf-lua": {
+      "rev": "d6e899e8dfdaf47bf849c0875ca3ca0e5a0e0d12",
+      "src": "https://github.com/ibhagwan/fzf-lua"
+    },
+    "gitsigns.nvim": {
+      "rev": "6e3c66548035e50db7bd8e360a29aec6620c3641",
+      "src": "https://github.com/lewis6991/gitsigns.nvim"
+    },
+    "live-preview.nvim": {
+      "rev": "35ddc5a99499d1d2f4adefb7e92d0c537353fdec",
+      "src": "https://github.com/brianhuster/live-preview.nvim"
+    },
+    "lualine.nvim": {
+      "rev": "b8c23159c0161f4b89196f74ee3a6d02cdc3a955",
+      "src": "https://github.com/nvim-lualine/lualine.nvim"
+    },
+    "mason-nvim-dap.nvim": {
+      "rev": "86389a3dd687cfaa647b6f44731e492970034baa",
+      "src": "https://github.com/jay-babu/mason-nvim-dap.nvim"
+    },
+    "mason-registry": {
+      "rev": "fd19838de59459d57b995d31cc0a1998b98ee0d0",
+      "src": "https://github.com/mason-org/mason-registry"
+    },
+    "mason-tool-installer.nvim": {
+      "rev": "517ef5994ef9d6b738322664d5fdd948f0fdeb46",
+      "src": "https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim"
+    },
+    "mason.nvim": {
+      "rev": "7dc4facca9702f95353d5a1f87daf23d78e31c2a",
+      "src": "https://github.com/mason-org/mason.nvim"
+    },
+    "nvim-dap": {
+      "rev": "f777d1d20ed50c2f312e286892c062d9c2f1c6fe",
+      "src": "https://github.com/mfussenegger/nvim-dap"
+    },
+    "nvim-dap-ui": {
+      "rev": "cf91d5e2d07c72903d052f5207511bf7ecdb7122",
+      "src": "https://github.com/rcarriga/nvim-dap-ui"
+    },
+    "nvim-dap-virtual-text": {
+      "rev": "fbdb48c2ed45f4a8293d0d483f7730d24467ccb6",
+      "src": "https://github.com/theHamsta/nvim-dap-virtual-text"
+    },
+    "nvim-jdtls": {
+      "rev": "4d77ff02063cf88963d5cf10683ab1fd15d072de",
+      "src": "https://github.com/mfussenegger/nvim-jdtls"
+    },
+    "nvim-lspconfig": {
+      "rev": "1c505a2a37c7732fb2a7e290c0f822abfb2ba1c5",
+      "src": "https://github.com/neovim/nvim-lspconfig"
+    },
+    "nvim-nio": {
+      "rev": "21f5324bfac14e22ba26553caf69ec76ae8a7662",
+      "src": "https://github.com/nvim-neotest/nvim-nio"
+    },
+    "nvim-tree.lua": {
+      "rev": "b70a741f5a29a1d2baa3bbe7e5c0a4a5d6423849",
+      "src": "https://github.com/nvim-tree/nvim-tree.lua"
+    },
     "nvim-treesitter": {
+      "rev": "42fc28ba918343ebfd5565147a42a26580579482",
+      "src": "https://github.com/nvim-treesitter/nvim-treesitter",
       "version": "'master'"
+    },
+    "oil.nvim": {
+      "rev": "07f80ad645895af849a597d1cac897059d89b686",
+      "src": "https://github.com/stevearc/oil.nvim"
+    },
+    "oxocarbon.nvim": {
+      "rev": "9f85f6090322f39b11ae04a343d4eb9d12a86897",
+      "src": "https://github.com/nyoom-engineering/oxocarbon.nvim"
     },
     "plenary.nvim": {
       "rev": "b9fd522",
