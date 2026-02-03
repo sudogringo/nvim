@@ -63,6 +63,7 @@ vim.lsp.enable {
   'html',
   'cssls',
   'pyright',
+  'clangd',
 }
 
 vim.api.nvim_create_autocmd('LspAttach', {
