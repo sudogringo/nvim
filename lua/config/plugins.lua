@@ -5,6 +5,7 @@ vim.pack.add {
     src = 'https://github.com/nvim-treesitter/nvim-treesitter',
     version = 'master',
   },
+  { src = 'https://github.com/tpope/vim-sleuth' },
 
   { src = 'https://github.com/neovim/nvim-lspconfig' },
   { src = 'https://github.com/mason-org/mason.nvim' },
@@ -38,6 +39,7 @@ require 'plugins.conform'
 require 'plugins.smear-cursor'
 
 require('nvim-tree').setup()
+-- require('vim-sleuth').setup()
 require('todo-comments').setup()
 require('gitsigns').setup()
 require('lualine').setup()
