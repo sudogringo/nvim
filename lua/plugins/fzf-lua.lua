@@ -33,5 +33,25 @@ require('fzf-lua').setup {
     '%-lock.json',
     '%-lock.yaml',
   },
+  diagnostics = {
+    actions = {
+      ['ctrl-y'] = function(selected, opts)
+        local text = selected[1]
+        vim.fn.setreg('+', text)
+      end,
+    },
+  },
+  undotree = {
+    winopts = {
+      width = 0.9,
+      height = 0.8,
+      row = 0.1,
+      col = 0.5,
+      border = 'single',
+    },
+    fzf_opts = {
+      ['--no-select-1'] = '',
+    },
+  },
 }
 require('fzf-lua').register_ui_select()
